@@ -60,10 +60,10 @@ export default {
           parseFloat(interestForValue) +
           parseFloat(additionAnnual);
         // this calculates datapoints for chart
-        const dataPoint = parseFloat(
+        /* const dataPoint = parseFloat(
           this.principal * Math.pow(1 + interest / 1, index).toFixed(2)
-        );
-        dataPoints.push(dataPoint);
+        );*/
+        dataPoints.push(futurevalue);
         labels.push(index);
       }
 
