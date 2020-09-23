@@ -61,21 +61,21 @@ export default {
             {
               lineTension: 0,
               label: "Future value",
-              borderColor: "green",
+              borderColor: "#85bb65", //dollar color #85bb65
               data: this.chartData,
               fill: false,
             },
             {
               lineTension: 0,
               label: "Total Interest",
-              borderColor: "red",
+              borderColor: "#ffa600",
               data: this.interest,
               fill: false,
             },
             {
               lineTension: 0,
               label: "Total Investment",
-              borderColor: "blue",
+              borderColor: "#dd5182",
               data: this.investment,
               fill: false,
             },

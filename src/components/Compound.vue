@@ -3,7 +3,7 @@
     <h2>Calculate compound interest</h2>
     <form class="vueContainer">
       <div class="formElement">
-        <label for="principal">Your principal capital</label>
+        <label for="principal">Principal capital</label>
         <input
           v-model="principal"
           name="principal"
@@ -12,7 +12,7 @@
         />
       </div>
       <div class="formElement">
-        <label for="addition">Your monthly addition</label>
+        <label for="addition">Monthly addition</label>
         <input
           v-model="addition"
           name="addition"
@@ -38,10 +38,11 @@
       <button class="calcBtn" v-on:click="calculate">
         Calculate
       </button>
-
-      <div class="output">Total interest: {{ totalInterest }} $</div>
-      <div class="output">Total investment: {{ totalInvestedAmount }} $</div>
-      <div class="output">Future value: {{ futurevalue }} $</div>
+      <div class="outputContainer">
+        <div class="output">Total interest: {{ totalInterest }} $</div>
+        <div class="output">Total investment: {{ totalInvestedAmount }} $</div>
+        <div class="output">Future value: {{ futurevalue }} $</div>
+      </div>
     </div>
     <Chart
       :labels="labels"
@@ -122,7 +123,7 @@ export default {
 
 <style scoped>
 h2 {
-  border-bottom: 4px solid green;
+  border-bottom: 4px solid #333;
 }
 .formElement {
   display: grid;
@@ -147,7 +148,7 @@ h2 {
 }
 .calcBtn {
   outline: none;
-  background: green;
+  background: #333;
   color: white;
   height: 50px;
   width: 100%;
@@ -155,8 +156,16 @@ h2 {
   padding: 0;
   border: 0;
   cursor: pointer;
+  margin-bottom: 25px;
 }
 .calcBtn:hover {
   opacity: 0.9;
+}
+.outputContainer {
+  font-size: 1.4rem;
+  text-align: left;
+  margin-bottom: 25px;
+  border: 2px solid #333;
+  padding: 5px;
 }
 </style>
