@@ -43,7 +43,13 @@
       <div class="output">Total investment: {{ totalInvestedAmount }} $</div>
       <div class="output">Future value: {{ futurevalue }} $</div>
     </div>
-    <Chart :labels="labels" :datasets="dataPoints"> </Chart>
+    <Chart
+      :labels="labels"
+      :futurevalue="dataPoints"
+      :interest="interestDataPoints"
+      :investment="investmentDataPoints"
+    >
+    </Chart>
   </div>
 </template>
 
@@ -66,11 +72,15 @@ export default {
       totalInvestedAmount: 0,
       labels: [], // for bar or line chart
       dataPoints: [], // for bar or line chart
+      interestDataPoints: [], // for bar or line chart
+      investmentDataPoints: [], // for bar or line chart
     };
   },
   methods: {
     calculate() {
       let dataPoints = [];
+      let interestDataPoints = [];
+      let investmentDataPoints = [];
       let labels = [];
       //const interest = this.interest / 100;
       let futurevalue = this.principal;
@@ -85,12 +95,15 @@ export default {
           parseFloat(additionAnnual);
 
         interestTotal = interestTotal + interestForValue;
-
+        interestDataPoints.push(interestTotal);
+        investmentDataPoints.push(futurevalue - interestTotal);
         dataPoints.push(futurevalue);
         labels.push(index);
       }
 
       this.dataPoints = dataPoints;
+      this.interestDataPoints = interestDataPoints;
+      this.investmentDataPoints = investmentDataPoints;
       this.labels = labels;
       this.futurevalue = futurevalue.toFixed(0);
       this.totalInterest = interestTotal.toFixed(0);

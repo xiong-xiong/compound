@@ -38,15 +38,17 @@ export default {
   },
   props: {
     labels: Array,
-    datasets: Array,
+    futurevalue: Array,
+    interest: Array,
+    investment: Array,
   },
   computed: {
     chartData: function() {
-      return this.datasets;
+      return this.futurevalue;
     },
   },
   watch: {
-    datasets: function() {
+    futurevalue: function() {
       this.renderLineChart();
     },
   },
@@ -58,9 +60,23 @@ export default {
           datasets: [
             {
               lineTension: 0,
-              label: "Value",
+              label: "Future value",
               borderColor: "green",
               data: this.chartData,
+              fill: false,
+            },
+            {
+              lineTension: 0,
+              label: "Total Interest",
+              borderColor: "red",
+              data: this.interest,
+              fill: false,
+            },
+            {
+              lineTension: 0,
+              label: "Total Investment",
+              borderColor: "blue",
+              data: this.investment,
               fill: false,
             },
           ],
