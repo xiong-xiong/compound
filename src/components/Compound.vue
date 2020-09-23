@@ -39,9 +39,9 @@
         Calculate
       </button>
       <div class="outputContainer">
-        <div class="output">Total interest: {{ totalInterest }} $</div>
-        <div class="output">Total investment: {{ totalInvestedAmount }} $</div>
-        <div class="output">Future value: {{ futurevalue }} $</div>
+        <div class="output">Total interest: {{ totalInterest }} €</div>
+        <div class="output">Total investment: {{ totalInvestedAmount }} €</div>
+        <div class="output">Future value: {{ futurevalue }} €</div>
       </div>
     </div>
     <Chart

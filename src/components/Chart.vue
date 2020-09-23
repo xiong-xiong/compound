@@ -68,14 +68,14 @@ export default {
             {
               lineTension: 0,
               label: "Total Interest",
-              borderColor: "#ffa600",
+              borderColor: "#FFCC00",
               data: this.interest,
               fill: false,
             },
             {
               lineTension: 0,
               label: "Total Investment",
-              borderColor: "#dd5182",
+              borderColor: "#003399",
               data: this.investment,
               fill: false,
             },
