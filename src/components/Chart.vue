@@ -58,7 +58,7 @@ export default {
           datasets: [
             {
               lineTension: 0,
-              label: "capital",
+              label: "Value",
               borderColor: "green",
               data: this.chartData,
               fill: false,

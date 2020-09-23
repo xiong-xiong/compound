@@ -1,27 +1,48 @@
 <template>
   <div class="compound">
-    <h2>Calculate your compound interest</h2>
+    <h2>Calculate compound interest</h2>
     <form class="vueContainer">
       <div class="formElement">
         <label for="principal">Your principal capital</label>
-        <input v-model="principal" name="principal" type="number" />
+        <input
+          v-model="principal"
+          name="principal"
+          type="number"
+          @change="calculate"
+        />
       </div>
       <div class="formElement">
         <label for="addition">Your monthly addition</label>
-        <input v-model="addition" name="addition" type="number" />
+        <input
+          v-model="addition"
+          name="addition"
+          type="number"
+          @change="calculate"
+        />
       </div>
       <div class="formElement">
         <label for="interest">Expected annual interest</label>
-        <input v-model="interest" name="interest" type="number" />
+        <input
+          v-model="interest"
+          name="interest"
+          type="number"
+          @change="calculate"
+        />
       </div>
       <div class="formElement">
         <label for="years">Years to grow</label>
-        <input v-model="years" name="years" type="number" />
+        <input v-model="years" name="years" type="number" @change="calculate" />
       </div>
     </form>
-    <button v-on:click="calculate">Calculate</button>
-    <div class="output">{{ output }}$</div>
+    <div class="vueContainer">
+      <button class="calcBtn" v-on:click="calculate">
+        Calculate
+      </button>
 
+      <div class="output">Total interest: {{ totalInterest }} $</div>
+      <div class="output">Total investment: {{ totalInvestedAmount }} $</div>
+      <div class="output">Future value: {{ futurevalue }} $</div>
+    </div>
     <Chart :labels="labels" :datasets="dataPoints"> </Chart>
   </div>
 </template>
@@ -36,11 +57,13 @@ export default {
   },
   data() {
     return {
-      principal: 10,
-      addition: 1,
+      principal: 5000,
+      addition: 100,
       interest: 5,
       years: 5,
-      output: 0,
+      futurevalue: 0,
+      totalInterest: 0,
+      totalInvestedAmount: 0,
       labels: [], // for bar or line chart
       dataPoints: [], // for bar or line chart
     };
@@ -49,8 +72,9 @@ export default {
     calculate() {
       let dataPoints = [];
       let labels = [];
-      const interest = this.interest / 100;
+      //const interest = this.interest / 100;
       let futurevalue = this.principal;
+      let interestTotal = 0;
       for (let index = 1; index <= this.years; index++) {
         const interestForValue =
           parseFloat(futurevalue) * (parseFloat(this.interest) / 100);
@@ -60,17 +84,17 @@ export default {
           parseFloat(interestForValue) +
           parseFloat(additionAnnual);
 
+        interestTotal = interestTotal + interestForValue;
+
         dataPoints.push(futurevalue);
         labels.push(index);
       }
 
-      const answer = parseFloat(
-        this.principal * Math.pow(1 + interest / 1, this.years)
-      );
       this.dataPoints = dataPoints;
       this.labels = labels;
-      this.output = futurevalue.toFixed(2);
-      return answer;
+      this.futurevalue = futurevalue.toFixed(0);
+      this.totalInterest = interestTotal.toFixed(0);
+      this.totalInvestedAmount = (futurevalue - interestTotal).toFixed(0);
     },
   },
   beforeMount() {
@@ -80,12 +104,16 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  border-bottom: 4px solid green;
+}
 .formElement {
   display: grid;
   grid-template-columns: 1fr 1fr;
   text-align: left;
   margin-bottom: 20px;
 }
+
 .formElement label {
   display: block;
   width: auto;
@@ -99,5 +127,19 @@ export default {
   width: 600px;
   max-width: 100%;
   margin: 0 auto;
+}
+.calcBtn {
+  outline: none;
+  background: green;
+  color: white;
+  height: 50px;
+  width: 100%;
+  line-height: 50px;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}
+.calcBtn:hover {
+  opacity: 0.9;
 }
 </style>
