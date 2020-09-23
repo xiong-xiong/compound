@@ -89,16 +89,20 @@ export default {
         const interestForValue =
           parseFloat(futurevalue) * (parseFloat(this.interest) / 100);
         const additionAnnual = parseFloat(this.addition) * 12;
+
+        // FUTURE VALUE NUM
         futurevalue =
           parseFloat(futurevalue) +
           parseFloat(interestForValue) +
           parseFloat(additionAnnual);
-
+        // INTEREST TOTAL NUM
         interestTotal = interestTotal + interestForValue;
-        interestDataPoints.push(interestTotal);
-        investmentDataPoints.push(futurevalue - interestTotal);
-        dataPoints.push(futurevalue);
-        labels.push(index);
+
+        // CHART DATAPOINTS
+        interestDataPoints.push(interestTotal.toFixed(0));
+        investmentDataPoints.push((futurevalue - interestTotal).toFixed(0));
+        dataPoints.push(futurevalue.toFixed(0));
+        labels.push("Year " + index);
       }
 
       this.dataPoints = dataPoints;
